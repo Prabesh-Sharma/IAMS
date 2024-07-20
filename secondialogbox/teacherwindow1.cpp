@@ -39,6 +39,8 @@ SecDialog::~SecDialog()
     delete ui;
 }
 
+
+
 void SecDialog::okbutton()
 {
     QString username = ui->userEdit->text();
@@ -68,7 +70,7 @@ void SecDialog::okbutton()
             hide();
 
             TeacherDashBoard = new teacherdashboard(this, username);
-            TeacherDashBoard->show();
+            TeacherDashBoard->showMaximized();
         }
         else if(count > 1){
             ui->status->setText("Duplicate username or password");

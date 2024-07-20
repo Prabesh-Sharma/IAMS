@@ -3,7 +3,7 @@
 #include"teacherwindow1.h"
 #include"studentwindow1.h"
 #include <QMainWindow>
-
+#include<QSqlQuery>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;

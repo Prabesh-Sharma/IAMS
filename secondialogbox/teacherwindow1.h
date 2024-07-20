@@ -59,6 +59,7 @@ private slots:
 
     void on_backButton_clicked();
 
+
 private:
     Ui::SecDialog *ui;
     teacherdashboard *TeacherDashBoard;
