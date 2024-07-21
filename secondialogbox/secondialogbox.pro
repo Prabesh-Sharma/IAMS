@@ -35,6 +35,8 @@ FORMS += \
     studentwindow1.ui \
     teacherdashboard.ui \
     teacherwindow1.ui
+    teacherdashboard.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

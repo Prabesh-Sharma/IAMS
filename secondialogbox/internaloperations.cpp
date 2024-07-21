@@ -6,9 +6,31 @@ QTextCharFormat internalHighlightFormat;
 InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database()) {
 
     internalHighlightFormat.setBackground(Qt::red);
+    getAllAssignmentDateList();
 }
 
+void InternalOperations:: getAllAssignmentDateList(){
 
+    if (!db->connectionOpen()) {
+        qDebug() << "Failed to open database";
+        return;
+    }
+
+    QSqlQuery qry;
+    qry.prepare("SELECT deadline FROM Assignment");
+    if (qry.exec()) {
+        while (qry.next()) {
+            QString date = qry.value(0).toString();
+            assignmentDateList.append(date);
+        }
+    } else {
+        qDebug() << "Query execution error: " << qry.lastError().text();
+        db->connectionClose();
+    }
+
+    db->connectionClose();
+
+}
 
 void InternalOperations::highlightInternalDatesOnCalender()
 {
@@ -46,6 +68,7 @@ void InternalOperations::highlightInternalDatesOnCalender()
 
 bool InternalOperations::getAllInternalDates(const QString &dateString)
 {
+    QStringList internalDateList;
 
     if (!db->connectionOpen()) {
         qDebug() << "Failed to open database";
@@ -68,7 +91,7 @@ bool InternalOperations::getAllInternalDates(const QString &dateString)
 
     QStringList updatedDateList = checkInternalDate(internalDateList);
 
-
+    updatedDateList.append(assignmentDateList);
 
     return !updatedDateList.contains(dateString);
 }
@@ -144,6 +167,8 @@ void InternalOperations::showAvailableInternalDates(){
     }
 
     dateList.append(tempList);
+
+    dateList.append(assignmentDateList);
 
     QStringList availableDateList;
     QDate currentDate = QDate::currentDate();

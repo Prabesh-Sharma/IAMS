@@ -5,11 +5,6 @@ Database::Database()
 
 }
 
-// Database::Database(Ui::teacherdashboard *ui) : ui(ui) {
-
-
-// }
-
 bool Database::connectionOpen()
 {
     if (QSqlDatabase::contains("qt_sql_default_connection")) {

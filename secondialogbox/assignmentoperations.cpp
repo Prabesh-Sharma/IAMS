@@ -1,16 +1,18 @@
-#include "assignmentoperations.h"
+#include"assignmentoperations.h"
 
 QTextCharFormat assignmentHighlightFormat;
 
 AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database())
 {
-     assignmentHighlightFormat.setBackground(Qt::yellow);
+   assignmentHighlightFormat.setBackground(Qt::yellow);
+    getInternalDateList();
 }
 
 void AssignmentOperations::getInternalDateList(){
 
     if (!db->connectionOpen()) {
         qDebug() << "Failed to open database";
+        return;
     }
 
     QSqlQuery qry;
@@ -20,10 +22,10 @@ void AssignmentOperations::getInternalDateList(){
             QString date = qry.value(0).toString();
             internalDateList.append(date);
         }
-    }else {
+    } else {
         qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
     }
+    db->connectionClose();
 }
 
 void AssignmentOperations::showAvailableAssignmentDates(){
@@ -50,8 +52,6 @@ void AssignmentOperations::showAvailableAssignmentDates(){
     }
     db->connectionClose();
 
-    dateList.append(internalDateList);
-
     // Process dates: add days before and after each date
     QStringList tempList;
 
@@ -73,6 +73,7 @@ void AssignmentOperations::showAvailableAssignmentDates(){
 
     // Append the temporary list of dates to the original list
     dateList.append(tempList);
+    dateList.append(internalDateList);
 
     // Generate available dates
     QStringList availableDateList;
@@ -111,6 +112,8 @@ void AssignmentOperations::showAvailableAssignmentDates(){
 }
 
 bool AssignmentOperations::getAllAssignmentDates(const QString &dateString){
+
+    QStringList assignmentDateList;
 
     if (!db->connectionOpen()) {
         qDebug() << "Failed to open database";
@@ -185,7 +188,7 @@ void AssignmentOperations::highlightAssignmentDatesOnCalender(){
         db->connectionClose();
     }
 
-    dateList.append(internalDateList);
+   // dateList.append(internalDateList);
 
     QTextCharFormat highlightFormat;
     highlightFormat.setBackground(Qt::yellow);

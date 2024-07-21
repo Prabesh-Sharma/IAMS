@@ -3,6 +3,7 @@
 
 #include "ui_teacherdashboard.h"
 #include "database.h"
+#include "internaloperations.h"
 
 #include<QString>
 #include<QDebug>
@@ -34,7 +35,8 @@ private:
 
     Database *db;
 
-    QStringList assignmentDateList,internalDateList;
+    QStringList internalDateList;
+
 
 
 };

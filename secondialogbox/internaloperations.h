@@ -14,20 +14,20 @@
 class InternalOperations
 {
 public:
+
     InternalOperations(Ui::teacherdashboard *ui);
     bool getAllInternalDates(const QString &dateString);
     void highlightInternalDatesOnCalender();
     void showAvailableInternalDates();
-    QStringList checkInternalDate(QStringList &dateList);
-
+    QStringList checkInternalDate(QStringList &dateList);    
+    void getAllAssignmentDateList();
 
 private:
 
     QSqlDatabase mydb;
     Ui::teacherdashboard *ui;
     Database *db;
-    QStringList internalDateList;
-
+    QStringList assignmentDateList;
 
 };
 
