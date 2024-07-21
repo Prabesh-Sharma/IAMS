@@ -5,6 +5,11 @@
 #include <QSqlDatabase>
 #include <QMessageBox>
 
+#include "assignmentoperations.h"
+#include "internaloperations.h"
+#include "database.h"
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class teacherdashboard; }
 QT_END_NAMESPACE
@@ -21,22 +26,12 @@ private slots:
     void showHomePage();
     void showAssignmentPage();
     void showInternalPage();
-    void highlightInternalDatesOnCalender();
-    void highlightAssignmentDatesOnCalender();
     void on_internalUpdate_clicked();
     void on_internalAdd_clicked();
     void on_internalDelete_clicked();
     void on_logOut_clicked();
-    bool checkInternalTime(QDate &selectedDate);
+    bool checkTime(QDate &selectedDate);
     bool matchcode(const QString &username, const QString &code);
-    bool getAllDates(const QString &dateString);
-    bool getAllAssignmentDates(const QString &dateString);
-    QStringList checkExamDate(QStringList &dateList);
-    QStringList checkAssignmentDate(QStringList &dateList);
-    void connectionClose();
-    bool connectionOpen();
-    void showAvailableInternalDates();
-    void showAvailableAssignmentDates();
     void on_assignmentAddButton_clicked();
     void on_assignmentupdateButton_clicked();
     void on_assignmentDeleteButton_clicked();
@@ -45,7 +40,9 @@ private:
     Ui::teacherdashboard *ui;
     QString t_username;
     QSqlDatabase mydb;
-
+    AssignmentOperations *assignmentOps;
+    InternalOperations *internalOps;
+    Database *db;
 
 
 };

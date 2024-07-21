@@ -9,6 +9,9 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    assignmentoperations.cpp \
+    database.cpp \
+    internaloperations.cpp \
     main.cpp \
     mainwindow.cpp \
     studentdashboard.cpp \
@@ -17,6 +20,9 @@ SOURCES += \
     teacherwindow1.cpp
 
 HEADERS += \
+    assignmentoperations.h \
+    database.h \
+    internaloperations.h \
     mainwindow.h \
     studentdashboard.h \
     studentwindow1.h \
