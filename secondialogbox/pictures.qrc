@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/images">
         <file>images/Black Illustrative Education Logo.png</file>
+        <file>images/redColour.png</file>
+        <file>images/yellowColour.jpeg</file>
     </qresource>
     <qresource prefix="/database"/>
 </RCC>

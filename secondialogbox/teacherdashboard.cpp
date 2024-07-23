@@ -32,6 +32,16 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
     ui->dateEdit->setDate(QDate::currentDate());
     ui->assignmentDateEdit->setDate(QDate::currentDate());
 
+    QLabel *yellowPic = ui->yelloPic;
+    int width = yellowPic->width();
+    int height = yellowPic->height();
+
+    QPixmap yellowPicture(":/images/images/yellowColour.jpeg");
+    yellowPic->setPixmap(yellowPicture.scaled(width, height, Qt::KeepAspectRatio));
+
+    QLabel *redPic = ui->redPic;
+    QPixmap redPicture(":/images/images/redColour.png");
+    redPic->setPixmap(redPicture.scaled(width, height, Qt::KeepAspectRatio));
 
 }
 

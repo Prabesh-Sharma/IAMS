@@ -2,10 +2,109 @@
 
 QTextCharFormat assignmentHighlightFormat;
 
-AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database())
-{
-   assignmentHighlightFormat.setBackground(Qt::yellow);
+AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), db(new Database()) {
+    assignmentHighlightFormat.setBackground(Qt::yellow);
+
+    QFont tooltipFont("Arial", 12);
+    QToolTip::setFont(tooltipFont);
+
+
+    // QPalette tooltipPalette;
+    // tooltipPalette.setColor(QPalette::Window, Qt::yellow);
+    // tooltipPalette.setColor(QPalette::WindowText, Qt::black);
+    // QToolTip::setPalette(tooltipPalette);
+
     getInternalDateList();
+    getNotes();
+
+    connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &AssignmentOperations::showNoteForSelectedDate);
+}
+
+
+void AssignmentOperations::getNotes() {
+
+    if (!db->connectionOpen()) {
+        qDebug() << "Failed to open database";
+        return;
+    }
+
+    QTextCharFormat highlightFormat;
+    highlightFormat.setBackground(Qt::yellow);
+
+    QSqlQuery qry;
+    qry.prepare("SELECT courseCode,deadLine from Assignment");
+    if (qry.exec()) {
+        QMap<QDate, QString> notes;
+        while (qry.next()) {
+            QString courseCode = qry.value(0).toString();
+            QString dateString = qry.value(1).toString();
+
+
+            QDate date = QDate::fromString(dateString, "MM/dd/yyyy");
+
+            if (!date.isValid()) {
+                qDebug() << "Invalid date:" << dateString;
+                continue;
+            }
+
+            qDebug() << "Highlighting date:" << date.toString();
+            ui->Calender->setDateTextFormat(date, highlightFormat);
+            QString note = courseCode ;
+            notes.insert(date, note);
+        }
+        notesMap.append(notes);
+    }
+    db->connectionClose();
+}
+
+void AssignmentOperations::showNoteForSelectedDate() {
+    QDate selectedDate = ui->Calender->selectedDate();
+    for ( auto &notes : notesMap) {
+        if (notes.contains(selectedDate)) {
+            QString note = notes.value(selectedDate);
+
+            // Test tooltip display
+            QPoint globalPos = QCursor::pos();
+            QToolTip::showText(globalPos, note, ui->Calender);
+
+            qDebug() << "Showing tooltip for date:" << selectedDate.toString();
+            return;
+        }
+    }
+    qDebug() << "No note found for date:" << selectedDate.toString();
+}
+
+void AssignmentOperations::highlightAssignmentDatesOnCalender(){
+
+    QStringList dateList;
+
+    if (!db->connectionOpen()) {
+        qDebug() << "Failed to open database";
+    }
+
+    QSqlQuery qry;
+    qry.prepare("SELECT deadLine FROM Assignment");
+    if (qry.exec()) {
+        while (qry.next()) {
+            QString date = qry.value(0).toString();
+            dateList.append(date);
+        }
+    } else {
+        qDebug() << "Query execution error: " << qry.lastError().text();
+        db->connectionClose();
+    }
+
+    // dateList.append(internalDateList);
+
+    QTextCharFormat highlightFormat;
+    highlightFormat.setBackground(Qt::yellow);
+
+    for (int i = 0; i < dateList.size(); ++i) {
+        QString dateString = dateList[i];
+        QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
+        ui->Calender->setDateTextFormat(originalDate, highlightFormat);
+    }
+
 }
 
 void AssignmentOperations::getInternalDateList(){
@@ -168,36 +267,6 @@ QStringList AssignmentOperations::checkAssignmentDate(QStringList &dateList)
     return dateList;
 }
 
-void AssignmentOperations::highlightAssignmentDatesOnCalender(){
 
-    QStringList dateList;
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT deadLine FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            dateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-    }
-
-   // dateList.append(internalDateList);
-
-    QTextCharFormat highlightFormat;
-    highlightFormat.setBackground(Qt::yellow);
-
-    for (int i = 0; i < dateList.size(); ++i) {
-        QString dateString = dateList[i];
-        QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
-        ui->Calender->setDateTextFormat(originalDate, highlightFormat);
-    }
-}
 
 

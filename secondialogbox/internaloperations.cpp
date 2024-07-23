@@ -7,7 +7,67 @@ InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new
 
     internalHighlightFormat.setBackground(Qt::red);
     getAllAssignmentDateList();
+    QFont tooltipFont("Arial", 12);
+    QToolTip::setFont(tooltipFont);
+    getNotes();
+    getAllAssignmentDateList();
+    connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &InternalOperations::showNoteForSelectedDate);
 }
+
+void InternalOperations::getNotes() {
+
+    if (!db->connectionOpen()) {
+        qDebug() << "Failed to open database";
+        return;
+    }
+
+    QTextCharFormat highlightFormat;
+    highlightFormat.setBackground(Qt::yellow);
+
+    QSqlQuery qry;
+    qry.prepare("SELECT Course_Code, Date, Time, Block, RoomNo FROM Exam");
+    if (qry.exec()) {
+        QMap<QDate, QString> notes;
+        while (qry.next()) {
+            QString courseCode = qry.value(0).toString();
+            QString dateString = qry.value(1).toString();
+            QString time = qry.value(2).toString();
+            QString block = qry.value(3).toString();
+            QString roomNo = qry.value(4).toString();
+
+            QDate date = QDate::fromString(dateString, "MM/dd/yyyy");
+
+            if (!date.isValid()) {
+                qDebug() << "Invalid date:" << dateString;
+                continue;
+            }
+
+            qDebug() << "Highlighting date:" << date.toString();
+            ui->Calender->setDateTextFormat(date, highlightFormat);
+            QString note = courseCode + "\n" + "Time: " + time + "\n" + "roomNo: " +roomNo + "\n" + "block:" + block;
+            notes.insert(date, note);
+        }
+        notesMap.append(notes);
+    }
+    db->connectionClose();
+}
+
+void InternalOperations::showNoteForSelectedDate() {
+    QDate selectedDate = ui->Calender->selectedDate();
+    for ( auto &notes : notesMap) {
+        if (notes.contains(selectedDate)) {
+            QString note = notes.value(selectedDate);
+
+            // Test tooltip display
+            QPoint globalPos = QCursor::pos();
+            QToolTip::showText(globalPos, note, ui->Calender);
+
+            qDebug() << "Showing tooltip for date:" << selectedDate.toString();
+            return;
+        }
+    }
+}
+
 
 void InternalOperations:: getAllAssignmentDateList(){
 

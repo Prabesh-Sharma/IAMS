@@ -3,7 +3,6 @@
 
 #include "ui_teacherdashboard.h"
 #include "database.h"
-#include "internaloperations.h"
 
 #include<QString>
 #include<QDebug>
@@ -11,9 +10,15 @@
 #include<QSqlQuery>
 #include<QSqlError>
 #include<QTableWidget>
+#include<QMessageBox>
+#include <QMap>
+#include<QAbstractButton>
+#include<QToolTip>
 
-class AssignmentOperations
+class AssignmentOperations: public QObject
 {
+     Q_OBJECT
+
 public:
 
     AssignmentOperations(Ui::teacherdashboard *ui);
@@ -28,6 +33,12 @@ public:
 
     void getInternalDateList();
 
+    void getNotes();
+
+    void showNoteForSelectedDate();
+
+    void mousePressEvent(QMouseEvent *event);
+
 private:
     QSqlDatabase mydb;
 
@@ -37,7 +48,7 @@ private:
 
     QStringList internalDateList;
 
-
+    QList<QMap<QDate, QString>> notesMap;
 
 };
 
