@@ -17,8 +17,6 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
     assignmentOps = new AssignmentOperations(ui);
     internalOps = new InternalOperations(ui);
 
-
-
     connect(ui->homeButton, &QPushButton::clicked, this, &teacherdashboard::showHomePage);
     connect(ui->assignmentButton, &QPushButton::clicked, this, &teacherdashboard::showAssignmentPage);
     connect(ui->internalButton, &QPushButton::clicked, this, &teacherdashboard::showInternalPage);

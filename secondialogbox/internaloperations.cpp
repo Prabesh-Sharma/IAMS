@@ -68,7 +68,6 @@ void InternalOperations::showNoteForSelectedDate() {
     }
 }
 
-
 void InternalOperations:: getAllAssignmentDateList(){
 
     if (!db->connectionOpen()) {

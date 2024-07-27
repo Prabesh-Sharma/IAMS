@@ -3,6 +3,19 @@
 
 #include <QDialog>
 #include <QtSql>
+#include<QString>
+#include<QDebug>
+#include<QCalendarWidget>
+#include<QSqlQuery>
+#include<QSqlError>
+#include<QTableWidget>
+#include<QMessageBox>
+#include <QMap>
+#include<QAbstractButton>
+#include<QToolTip>
+#include<QTextCharFormat>
+
+#include"database.h"
 
 namespace Ui {
 class studentdashboard;
@@ -25,9 +38,31 @@ private slots:
 
     void on_internalButton_clicked();
 
+    void getNotesAssignment();
+
+    void showNoteForSelectedDateAssignment();
+
+    void getInternalDateList();
+
+    void getAllAssignmentDateList();
+
+    void showNoteForSelectedDateInternal();
+
+    void getNotesInternal();
+
+    void highlightDatesOnCalender();
+
+
 private:
     Ui::studentdashboard *ui;
     QSqlDatabase mydb;
+
+    Database *db;
+
+    QStringList internalDateList, assignmentDateList;
+
+    QList<QMap<QDate, QString>> notesMap;
+
 };
 
 #endif // STUDENTDASHBOARD_H

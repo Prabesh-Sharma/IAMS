@@ -6,11 +6,11 @@
 
 studentwindow1::studentwindow1(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::studentwindow1)
+    , ui(new Ui::studentwindow1),db(new Database)
 {
     ui->setupUi(this);
 
-    if (!connectionOpen()) {
+    if(!db->connectionOpen()) {
         ui->status->setText("Unable to open database");
         qWarning() << "Database error: " << mydb.lastError().text();
     } else {
@@ -45,7 +45,7 @@ void studentwindow1::okbutton()
     QString username = ui->userEdit->text();
     QString password = ui->passwordEdit->text();
 
-    if (!connectionOpen()) {
+    if (!db->connectionOpen()) {
         qDebug() << "Failed to open database";
         return;
     }
@@ -77,7 +77,7 @@ void studentwindow1::okbutton()
         qDebug() << "Query execution error: " << qry.lastError().text();
     }
 
-    connectionClose();
+    db->connectionClose();
 }
 
 void studentwindow1::backbutton()
@@ -120,7 +120,7 @@ void studentwindow1::changePassword()
         return;
     }
 
-    if (!connectionOpen()) {
+    if (!db->connectionOpen()) {
         qDebug() << "Failed to open database";
         return;
     }
@@ -158,6 +158,6 @@ void studentwindow1::changePassword()
         qDebug() << "Query error: " << qry.lastError().text();
     }
 
-    connectionClose();
+    db->connectionClose();
 }
 
