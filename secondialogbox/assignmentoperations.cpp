@@ -9,12 +9,6 @@ AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), d
     QToolTip::setFont(tooltipFont);
 
 
-    // QPalette tooltipPalette;
-    // tooltipPalette.setColor(QPalette::Window, Qt::yellow);
-    // tooltipPalette.setColor(QPalette::WindowText, Qt::black);
-    // QToolTip::setPalette(tooltipPalette);
-
-
     getNotes();
 
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &AssignmentOperations::showNoteForSelectedDate);
@@ -47,7 +41,7 @@ void AssignmentOperations::getNotes() {
                 continue;
             }
 
-            qDebug() << "Highlighting date:" << date.toString();
+
             ui->Calender->setDateTextFormat(date, highlightFormat);
             QString note = courseCode ;
             notes.insert(date, note);

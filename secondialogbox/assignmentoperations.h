@@ -48,8 +48,6 @@ private:
 
     List *list;
 
-    QStringList internalDateList;
-
     QList<QMap<QDate, QString>> notesMap;
 
 };

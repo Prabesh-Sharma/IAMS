@@ -1,6 +1,8 @@
 #ifndef STUDENTDASHBOARD_H
 #define STUDENTDASHBOARD_H
 
+#include"list.h"
+
 #include <QDialog>
 #include <QtSql>
 #include<QString>
@@ -42,10 +44,6 @@ private slots:
 
     void showNoteForSelectedDateAssignment();
 
-    void getInternalDateList();
-
-    void getAllAssignmentDateList();
-
     void showNoteForSelectedDateInternal();
 
     void getNotesInternal();
@@ -55,11 +53,12 @@ private slots:
 
 private:
     Ui::studentdashboard *ui;
+
     QSqlDatabase mydb;
 
     Database *db;
 
-    QStringList internalDateList, assignmentDateList;
+    List *list;
 
     QList<QMap<QDate, QString>> notesMap;
 

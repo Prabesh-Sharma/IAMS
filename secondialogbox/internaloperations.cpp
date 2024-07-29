@@ -40,7 +40,7 @@ void InternalOperations::getNotes() {
                 continue;
             }
 
-            qDebug() << "Highlighting date:" << date.toString();
+
             ui->Calender->setDateTextFormat(date, highlightFormat);
             QString note = courseCode + "\n" + "Time: " + time + "\n" + "roomNo: " +roomNo + "\n" + "block:" + block;
             notes.insert(date, note);

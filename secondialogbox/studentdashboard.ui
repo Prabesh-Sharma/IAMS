@@ -180,7 +180,7 @@ QPushButton:focus {
     <number>0</number>
    </property>
    <widget class="QWidget" name="Home">
-    <widget class="QCalendarWidget" name="Calender">
+    <widget class="QCalendarWidget" name="calendar">
      <property name="geometry">
       <rect>
        <x>10</x>

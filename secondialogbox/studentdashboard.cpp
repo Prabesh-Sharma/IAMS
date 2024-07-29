@@ -6,7 +6,7 @@
 
 studentdashboard::studentdashboard(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::studentdashboard), db(new Database)
+    ui(new Ui::studentdashboard), db(new Database), list(new List)
 {
     ui->setupUi(this);
     this->resize(800, 600);
@@ -16,19 +16,19 @@ studentdashboard::studentdashboard(QWidget *parent) :
     connect(ui->homeButton, &QPushButton::clicked, this, &studentdashboard::on_homeButton_clicked);
     connect(ui->assignmentButton, &QPushButton::clicked, this, &studentdashboard::on_assignmentButton_clicked);
     connect(ui->internalButton, &QPushButton::clicked, this, &studentdashboard::on_internalButton_clicked);
-    connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &studentdashboard::showNoteForSelectedDateAssignment);
-    connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &studentdashboard::showNoteForSelectedDateInternal);
+    connect(ui->calendar, &QCalendarWidget::selectionChanged, this, &studentdashboard::showNoteForSelectedDateAssignment);
+    connect(ui->calendar, &QCalendarWidget::selectionChanged, this, &studentdashboard::showNoteForSelectedDateInternal);
 
     QFont tooltipFont("Arial", 12);
     QToolTip::setFont(tooltipFont);
 
+    ui->calendar->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
+
+    ui->calendar->setGridVisible(true);
+
     getNotesAssignment();
 
-    getInternalDateList();
-
     getNotesInternal();
-
-    getAllAssignmentDateList();
 
     highlightDatesOnCalender();
 }
@@ -62,7 +62,7 @@ void studentdashboard::on_assignmentButton_clicked()
         QSqlQuery qry(mydb);
         if(qry.exec("SELECT * FROM Assignment")){
             QSqlQueryModel *modal = new QSqlQueryModel();
-            modal -> setQuery(qry);
+            modal->setQuery(std::move(qry));
             ui->AssinmentTableView->setModel(modal);
 
         }else{
@@ -74,7 +74,6 @@ void studentdashboard::on_assignmentButton_clicked()
 
     }
 
-
 void studentdashboard::on_internalButton_clicked()
 {
     db->connectionOpen();
@@ -82,7 +81,7 @@ void studentdashboard::on_internalButton_clicked()
     QSqlQuery qry(mydb);
     if (qry.exec("SELECT * FROM Exam")) {
         QSqlQueryModel *modal = new QSqlQueryModel();
-        modal->setQuery(qry);
+        modal->setQuery(std::move(qry));
         ui->internalTableView->setModel(modal);
 
     } else {
@@ -92,7 +91,6 @@ void studentdashboard::on_internalButton_clicked()
 
     db->connectionClose();
 }
-
 
 void studentdashboard::getNotesAssignment() {
 
@@ -120,8 +118,8 @@ void studentdashboard::getNotesAssignment() {
                 continue;
             }
 
-            qDebug() << "Highlighting date:" << date.toString();
-            ui->Calender->setDateTextFormat(date, highlightFormat);
+
+            ui->calendar->setDateTextFormat(date, highlightFormat);
             QString note = courseCode ;
             notes.insert(date, note);
         }
@@ -131,41 +129,20 @@ void studentdashboard::getNotesAssignment() {
 }
 
 void studentdashboard::showNoteForSelectedDateAssignment() {
-    QDate selectedDate = ui->Calender->selectedDate();
+    QDate selectedDate = ui->calendar->selectedDate();
     for ( auto &notes : notesMap) {
         if (notes.contains(selectedDate)) {
             QString note = notes.value(selectedDate);
 
             // Test tooltip display
             QPoint globalPos = QCursor::pos();
-            QToolTip::showText(globalPos, note, ui->Calender);
+            QToolTip::showText(globalPos, note, ui->calendar);
 
             qDebug() << "Showing tooltip for date:" << selectedDate.toString();
             return;
         }
     }
     qDebug() << "No note found for date:" << selectedDate.toString();
-}
-
-
-void studentdashboard::getInternalDateList(){
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT Date FROM Exam");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            internalDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-    }
-    db->connectionClose();
 }
 
 void studentdashboard::getNotesInternal() {
@@ -196,8 +173,7 @@ void studentdashboard::getNotesInternal() {
                 continue;
             }
 
-            qDebug() << "Highlighting date:" << date.toString();
-            ui->Calender->setDateTextFormat(date, highlightFormat);
+            ui->calendar->setDateTextFormat(date, highlightFormat);
             QString note = courseCode + "\n" + "Time: " + time + "\n" + "roomNo: " +roomNo + "\n" + "block:" + block;
             notes.insert(date, note);
         }
@@ -207,14 +183,14 @@ void studentdashboard::getNotesInternal() {
 }
 
 void studentdashboard::showNoteForSelectedDateInternal() {
-    QDate selectedDate = ui->Calender->selectedDate();
+    QDate selectedDate = ui->calendar->selectedDate();
     for ( auto &notes : notesMap) {
         if (notes.contains(selectedDate)) {
             QString note = notes.value(selectedDate);
 
             // Test tooltip display
             QPoint globalPos = QCursor::pos();
-            QToolTip::showText(globalPos, note, ui->Calender);
+            QToolTip::showText(globalPos, note, ui->calendar);
 
             qDebug() << "Showing tooltip for date:" << selectedDate.toString();
             return;
@@ -222,70 +198,14 @@ void studentdashboard::showNoteForSelectedDateInternal() {
     }
 }
 
-void studentdashboard:: getAllAssignmentDateList(){
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT deadline FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            assignmentDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-    }
-
-    db->connectionClose();
-
-}
-
 void studentdashboard::highlightDatesOnCalender() {
+
     QTextCharFormat defaultFormat;
-    ui->Calender->setDateTextFormat(QDate(), defaultFormat);
+    ui->calendar->setDateTextFormat(QDate(), defaultFormat);
 
-    QStringList internalDateList;
-    QStringList assignmentDateList;
+    QStringList internalDateList = list->internalDateList;
+    QStringList assignmentDateList = list->assignmentDateList;
 
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-
-    // Fetch internal dates
-    qry.prepare("SELECT Date FROM Exam");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            internalDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-        return;
-    }
-
-    // Fetch assignment dates
-    qry.prepare("SELECT deadLine FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            assignmentDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-        return;
-    }
-
-    db->connectionClose();
 
     QTextCharFormat internalHighlightFormat;
     internalHighlightFormat.setBackground(Qt::red);
@@ -296,17 +216,17 @@ void studentdashboard::highlightDatesOnCalender() {
     // Highlight internal dates
     for (const QString& dateString : internalDateList) {
         QDate date = QDate::fromString(dateString, "MM/dd/yyyy");
-        QTextCharFormat format = ui->Calender->dateTextFormat(date);
+        QTextCharFormat format = ui->calendar->dateTextFormat(date);
         format.setBackground(internalHighlightFormat.background());
-        ui->Calender->setDateTextFormat(date, format);
+        ui->calendar->setDateTextFormat(date, format);
     }
 
     // Highlight assignment dates
     for (const QString& dateString : assignmentDateList) {
         QDate date = QDate::fromString(dateString, "MM/dd/yyyy");
-        QTextCharFormat format = ui->Calender->dateTextFormat(date);
+        QTextCharFormat format = ui->calendar->dateTextFormat(date);
         format.setBackground(assignmentHighlightFormat.background());
-        ui->Calender->setDateTextFormat(date, format);
+        ui->calendar->setDateTextFormat(date, format);
     }
 }
 

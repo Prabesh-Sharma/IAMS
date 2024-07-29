@@ -41,6 +41,11 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
     QPixmap redPicture(":/images/images/redColour.png");
     redPic->setPixmap(redPicture.scaled(width, height, Qt::KeepAspectRatio));
 
+    ui->Calender->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
+
+    ui->Calender->setGridVisible(true);
+
+
 }
 
 teacherdashboard::~teacherdashboard()
