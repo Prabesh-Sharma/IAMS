@@ -388,7 +388,7 @@ teacherdashboard::~teacherdashboard()
         }
 
         QSqlQuery qry;
-        qry.prepare("DELETE FROM Assignment WHERE Course_Code = :code");
+        qry.prepare("DELETE FROM Assignment WHERE courseCode = :code");
         qry.bindValue(":code", code);
 
         if (qry.exec()) {

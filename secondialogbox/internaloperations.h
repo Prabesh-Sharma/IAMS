@@ -3,6 +3,8 @@
 
 #include "ui_teacherdashboard.h"
 #include "database.h"
+#include "list.h"
+
 
 #include <QString>
 #include <QDebug>
@@ -37,7 +39,7 @@ private:
     QSqlDatabase mydb;
     Ui::teacherdashboard *ui;
     Database *db;
-    QStringList assignmentDateList;
+    List *list;
     QList<QMap<QDate, QString>> notesMap;
 };
 

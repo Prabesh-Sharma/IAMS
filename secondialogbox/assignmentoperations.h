@@ -3,6 +3,8 @@
 
 #include "ui_teacherdashboard.h"
 #include "database.h"
+#include "list.h"
+
 
 #include<QString>
 #include<QDebug>
@@ -29,8 +31,6 @@ public:
 
     void showAvailableAssignmentDates();
 
-    QStringList checkAssignmentDate(QStringList &dateList);
-
     void getInternalDateList();
 
     void getNotes();
@@ -45,6 +45,8 @@ private:
     Ui::teacherdashboard *ui;
 
     Database *db;
+
+    List *list;
 
     QStringList internalDateList;
 

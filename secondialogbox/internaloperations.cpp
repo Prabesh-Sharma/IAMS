@@ -3,14 +3,12 @@
 QTextCharFormat internalHighlightFormat;
 
 
-InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database()) {
+InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database()), list(new List()) {
 
     internalHighlightFormat.setBackground(Qt::red);
-    getAllAssignmentDateList();
     QFont tooltipFont("Arial", 12);
     QToolTip::setFont(tooltipFont);
     getNotes();
-    getAllAssignmentDateList();
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &InternalOperations::showNoteForSelectedDate);
 }
 
@@ -68,58 +66,19 @@ void InternalOperations::showNoteForSelectedDate() {
     }
 }
 
-void InternalOperations:: getAllAssignmentDateList(){
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT deadline FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            assignmentDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-    }
-
-    db->connectionClose();
-
-}
-
 void InternalOperations::highlightInternalDatesOnCalender()
 {
     QTextCharFormat defaultFormat;
     ui->Calender->setDateTextFormat(QDate(), defaultFormat);
 
-    QStringList internalDateList;
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT Date FROM Exam");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            internalDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-    }
+    QStringList dateList = list->internalDateList;
 
 
     QTextCharFormat highlightFormat;
     highlightFormat.setBackground(Qt::red);
 
-    for (int i = 0; i < internalDateList.size(); ++i) {
-        QString dateString = internalDateList[i];
+    for (int i = 0; i < dateList.size(); ++i) {
+        QString dateString = dateList[i];
         QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
         ui->Calender->setDateTextFormat(originalDate, highlightFormat);
     }
@@ -127,107 +86,22 @@ void InternalOperations::highlightInternalDatesOnCalender()
 
 bool InternalOperations::getAllInternalDates(const QString &dateString)
 {
-    QStringList internalDateList;
+    QStringList internalDateList = list->internalDateList;
 
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return false;
-    }
+    internalDateList.append(list->updatedInternalDateList);
 
-    QSqlQuery qry;
-    qry.prepare("SELECT Date FROM Exam");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            internalDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-        return false;
-    }
-    db->connectionClose();
+    internalDateList.append(list->assignmentDateList);
 
-    QStringList updatedDateList = checkInternalDate(internalDateList);
-
-    updatedDateList.append(assignmentDateList);
-
-    return !updatedDateList.contains(dateString);
+    return !internalDateList.contains(dateString);
 }
-
-QStringList InternalOperations::checkInternalDate(QStringList &dateList)
-{
-    QStringList tempList;
-
-    for (const QString &dateString : dateList) {
-        QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
-
-        if (!originalDate.isValid()) {
-            qDebug() << "Invalid date format:" << dateString;
-            continue;
-        }
-
-        QDate increasedDate = originalDate.addDays(1);
-        QString increasedDateString = increasedDate.toString("MM/dd/yyyy");
-
-        dateList.append(increasedDateString);
-
-        QDate decreasedDate = originalDate.addDays(-1);
-        QString decreasedDateString = decreasedDate.toString("MM/dd/yyyy");
-
-        tempList.append(decreasedDateString);
-    }
-
-    dateList.append(tempList);
-    return dateList;}
 
 void InternalOperations::showAvailableInternalDates(){
 
-    QStringList dateList;
+    QStringList dateList = list->internalDateList;
 
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT Date FROM Exam");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            dateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-        return;
-    }
-    db->connectionClose();
-
-    QStringList tempList;
-
-    for (const QString &dateString : dateList) {
-        QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
-
-        if (!originalDate.isValid()) {
-            qDebug() << "Invalid date format:" << dateString;
-            continue;
-        }
-
-        QDate increasedDate = originalDate.addDays(1);
-        QString increasedDateString = increasedDate.toString("MM/dd/yyyy");
-
-        tempList.append(increasedDateString);
-
-        QDate decreasedDate = originalDate.addDays(-1);
-        QString decreasedDateString = decreasedDate.toString("MM/dd/yyyy");
-
-        tempList.append(decreasedDateString);
-    }
-
-    dateList.append(tempList);
-
-    dateList.append(assignmentDateList);
+    // Append the temporary list of dates to the original list
+    dateList.append(list->updatedInternalDateList);
+    dateList.append(list->assignmentDateList);
 
     QStringList availableDateList;
     QDate currentDate = QDate::currentDate();

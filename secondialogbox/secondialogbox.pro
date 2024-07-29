@@ -12,6 +12,7 @@ SOURCES += \
     assignmentoperations.cpp \
     database.cpp \
     internaloperations.cpp \
+    list.cpp \
     main.cpp \
     mainwindow.cpp \
     studentdashboard.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     assignmentoperations.h \
     database.h \
     internaloperations.h \
+    list.h \
     mainwindow.h \
     studentdashboard.h \
     studentwindow1.h \

@@ -2,7 +2,7 @@
 
 QTextCharFormat assignmentHighlightFormat;
 
-AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), db(new Database()) {
+AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), db(new Database()), list(new List()){
     assignmentHighlightFormat.setBackground(Qt::yellow);
 
     QFont tooltipFont("Arial", 12);
@@ -14,7 +14,7 @@ AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), d
     // tooltipPalette.setColor(QPalette::WindowText, Qt::black);
     // QToolTip::setPalette(tooltipPalette);
 
-    getInternalDateList();
+
     getNotes();
 
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &AssignmentOperations::showNoteForSelectedDate);
@@ -76,25 +76,8 @@ void AssignmentOperations::showNoteForSelectedDate() {
 
 void AssignmentOperations::highlightAssignmentDatesOnCalender(){
 
-    QStringList dateList;
+    QStringList dateList = list->assignmentDateList;
 
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT deadLine FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            dateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-    }
-
-    // dateList.append(internalDateList);
 
     QTextCharFormat highlightFormat;
     highlightFormat.setBackground(Qt::yellow);
@@ -107,72 +90,13 @@ void AssignmentOperations::highlightAssignmentDatesOnCalender(){
 
 }
 
-void AssignmentOperations::getInternalDateList(){
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT Date FROM Exam");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            internalDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-    }
-    db->connectionClose();
-}
-
 void AssignmentOperations::showAvailableAssignmentDates(){
 
-    // Fetch dates from the database
-    QStringList dateList;
-
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return;
-    }
-
-    QSqlQuery qry;
-    qry.prepare("SELECT deadLine FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            dateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-        return;
-    }
-    db->connectionClose();
-
-    // Process dates: add days before and after each date
-    QStringList tempList;
-
-    for (const QString &dateString : dateList) {
-        QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
-
-        if (!originalDate.isValid()) {
-            qDebug() << "Invalid date format:" << dateString;
-            continue;
-        }
-
-        // Add one day and one day before each date
-        QString increasedDateString = originalDate.addDays(1).toString("MM/dd/yyyy");
-        QString decreasedDateString = originalDate.addDays(-1).toString("MM/dd/yyyy");
-
-        tempList.append(increasedDateString);
-        tempList.append(decreasedDateString);
-    }
+    QStringList dateList = list->assignmentDateList;
 
     // Append the temporary list of dates to the original list
-    dateList.append(tempList);
-    dateList.append(internalDateList);
+    dateList.append(list->updatedAssignmentDateList);
+    dateList.append(list->internalDateList);
 
     // Generate available dates
     QStringList availableDateList;
@@ -212,60 +136,16 @@ void AssignmentOperations::showAvailableAssignmentDates(){
 
 bool AssignmentOperations::getAllAssignmentDates(const QString &dateString){
 
-    QStringList assignmentDateList;
+    QStringList assignmentDateList = list->assignmentDateList;
 
-    if (!db->connectionOpen()) {
-        qDebug() << "Failed to open database";
-        return false;
-    }
+    assignmentDateList.append(list->updatedAssignmentDateList);
 
-    QSqlQuery qry;
-    qry.prepare("SELECT deadLine FROM Assignment");
-    if (qry.exec()) {
-        while (qry.next()) {
-            QString date = qry.value(0).toString();
-            assignmentDateList.append(date);
-        }
-    } else {
-        qDebug() << "Query execution error: " << qry.lastError().text();
-        db->connectionClose();
-        return false;
-    }
-    db->connectionClose();
+    assignmentDateList.append(list->internalDateList);
 
-    QStringList updatedDateList = checkAssignmentDate(assignmentDateList);
-
-    updatedDateList.append(internalDateList);
-
-    return !updatedDateList.contains(dateString);
+    return !assignmentDateList.contains(dateString);
 }
 
-QStringList AssignmentOperations::checkAssignmentDate(QStringList &dateList)
-{
-    QStringList tempList;
 
-    for (const QString &dateString : dateList) {
-        QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
-
-        if (!originalDate.isValid()) {
-            qDebug() << "Invalid date format:" << dateString;
-            continue;
-        }
-
-        QDate increasedDate = originalDate.addDays(1);
-        QString increasedDateString = increasedDate.toString("MM/dd/yyyy");
-
-        tempList.append(increasedDateString);
-
-        QDate decreasedDate = originalDate.addDays(-1);
-        QString decreasedDateString = decreasedDate.toString("MM/dd/yyyy");
-
-        tempList.append(decreasedDateString);
-    }
-
-    dateList.append(tempList);
-    return dateList;
-}
 
 
 
