@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>559</height>
+    <height>966</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>61</x>
      <y>21</y>
      <width>141</width>
-     <height>481</height>
+     <height>691</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -166,10 +166,10 @@ QPushButton:focus {
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>230</x>
      <y>10</y>
-     <width>811</width>
-     <height>521</height>
+     <width>941</width>
+     <height>721</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -183,9 +183,9 @@ QPushButton:focus {
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
-       <width>811</width>
-       <height>521</height>
+       <y>80</y>
+       <width>941</width>
+       <height>631</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -204,6 +204,70 @@ calendarWidget-&gt;setStyleSheet(
     &quot;}&quot;
 );
 </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>40</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-color:black;</string>
+     </property>
+     <property name="text">
+      <string>Internal</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>40</y>
+       <width>63</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="pictures.qrc">:/images/images/redColour.png</pixmap>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>680</x>
+       <y>0</y>
+       <width>63</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="pictures.qrc">:/images/images/yellowColour.jpeg</pixmap>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>0</y>
+       <width>63</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-color:black;</string>
+     </property>
+     <property name="text">
+      <string>Assignment</string>
      </property>
     </widget>
    </widget>
@@ -233,6 +297,8 @@ calendarWidget-&gt;setStyleSheet(
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="pictures.qrc"/>
+ </resources>
  <connections/>
 </ui>
