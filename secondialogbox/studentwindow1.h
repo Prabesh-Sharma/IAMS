@@ -34,6 +34,8 @@ private slots:
 
     void changePassword();
 
+    void on_showButton_clicked();
+
 private:
     Ui::studentwindow1 *ui;
     QSqlDatabase mydb;
