@@ -38,6 +38,8 @@ private slots:
 
     void on_showButton_clicked();
 
+    void on_showButton_2_clicked();
+
 private:
     Ui::SecDialog *ui;
     teacherdashboard *TeacherDashBoard;

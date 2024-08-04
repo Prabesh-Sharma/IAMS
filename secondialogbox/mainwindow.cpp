@@ -66,7 +66,7 @@ void MainWindow::studentButton()
 
     studentWindow1 = new studentwindow1(this);
     hide();
-    studentWindow1->show();
+    studentWindow1->showMaximized();
 }
 void MainWindow::teacherButton()
 {
@@ -74,5 +74,5 @@ void MainWindow::teacherButton()
 
     teacherWindow1 = new SecDialog(this);
     hide();
-    teacherWindow1->show();
+    teacherWindow1->showMaximized();
 }
