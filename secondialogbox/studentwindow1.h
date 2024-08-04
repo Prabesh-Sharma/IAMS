@@ -36,6 +36,8 @@ private slots:
 
     void on_showButton_clicked();
 
+    void on_showButton_2_clicked();
+
 private:
     Ui::studentwindow1 *ui;
     QSqlDatabase mydb;

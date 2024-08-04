@@ -67,7 +67,7 @@ void studentwindow1::okbutton()
             ui->status->setText("Login successful");
             hide();
             StudentDashBoard = new studentdashboard(this);
-            StudentDashBoard->show();
+            StudentDashBoard->showMaximized();
         } else if (count > 1) {
             ui->status->setText("Duplicate username or password");
         } else {
@@ -164,11 +164,11 @@ void studentwindow1::changePassword()
 
 void studentwindow1::on_showButton_clicked()
 {
-    if(ui->showButton->text() == "hide"){
+    if(ui->showButton->text() == "Hide"){
 
 
         ui->passwordEdit->setEchoMode(QLineEdit::Password);
-        ui->showButton->setText("show");
+        ui->showButton->setText("Show");
 
     }
 
@@ -177,7 +177,29 @@ void studentwindow1::on_showButton_clicked()
     {
 
         ui->passwordEdit->setEchoMode(QLineEdit::Normal);
-        ui->showButton->setText("hide");
+        ui->showButton->setText("Hide");
+
+    }
+
+}
+
+
+void studentwindow1::on_showButton_2_clicked()
+{
+    if(ui->showButton_2->text() == "Hide"){
+
+
+        ui->passwordEdit2->setEchoMode(QLineEdit::Password);
+        ui->showButton_2->setText("Show");
+
+    }
+
+
+    else
+    {
+
+        ui->passwordEdit2->setEchoMode(QLineEdit::Normal);
+        ui->showButton_2->setText("Hide");
 
     }
 
