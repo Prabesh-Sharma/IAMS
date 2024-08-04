@@ -173,3 +173,25 @@ void SecDialog::on_backButton_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->mainPage);
 }
+
+void SecDialog::on_showButton_clicked()
+{
+    if(ui->showButton->text() == "hide"){
+
+
+        ui->passwordEdit->setEchoMode(QLineEdit::Password);
+        ui->showButton->setText("show");
+
+    }
+
+
+    else
+    {
+
+        ui->passwordEdit->setEchoMode(QLineEdit::Normal);
+        ui->showButton->setText("hide");
+
+    }
+
+}
+
