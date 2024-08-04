@@ -11,7 +11,7 @@ bool Database::connectionOpen()
         mydb = QSqlDatabase::database("qt_sql_default_connection");
     } else {
         mydb = QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName("C:\\Users\\Suresh\\Desktop\\IAMS\\database\\iamsdata.db");
+        mydb.setDatabaseName("C:\\Users\\A S U S\\Desktop\\IAMS\\database\\iamsdata.db");
     }
 
     if (!mydb.open()) {
