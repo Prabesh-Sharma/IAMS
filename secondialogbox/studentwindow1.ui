@@ -28,7 +28,7 @@ color: black</string>
 color: black</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="passwordPage">
       <layout class="QGridLayout" name="gridLayout_5">
@@ -74,7 +74,7 @@ color: black</string>
               </sizepolicy>
              </property>
              <property name="styleSheet">
-              <string notr="true">font: 11pt &quot;Segoe UI&quot;;</string>
+              <string notr="true">font: 18pt &quot;Segoe UI&quot;;</string>
              </property>
              <property name="text">
               <string>Username</string>
@@ -95,7 +95,11 @@ color: black</string>
             </spacer>
            </item>
            <item>
-            <widget class="QLineEdit" name="userEdit2"/>
+            <widget class="QLineEdit" name="userEdit2">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -116,13 +120,19 @@ color: black</string>
            </item>
            <item>
             <widget class="QPushButton" name="changeButton">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
-              <string>Change PassWord</string>
+              <string>Change Password</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="backButton">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
               <string>Back</string>
              </property>
@@ -153,6 +163,9 @@ color: black</string>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="styleSheet">
+              <string notr="true">font: 18pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
               <string>Password</string>
              </property>
@@ -173,15 +186,34 @@ color: black</string>
            </item>
            <item>
             <widget class="QLineEdit" name="passwordEdit3">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="echoMode">
               <enum>QLineEdit::Password</enum>
              </property>
             </widget>
            </item>
            <item>
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
               <widget class="QLineEdit" name="passwordEdit2">
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+               </property>
                <property name="echoMode">
                 <enum>QLineEdit::Password</enum>
                </property>
@@ -194,6 +226,9 @@ color: black</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
                </property>
                <property name="text">
                 <string>Show</string>
@@ -229,69 +264,49 @@ color: black</string>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <widget class="QLabel" name="status">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
               <string>[+]status</string>
              </property>
             </widget>
            </item>
            <item>
+            <spacer name="verticalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QLabel" name="displayLabel">
              <property name="styleSheet">
-              <string notr="true">QLabel{
-font-size:20px;
-
-}</string>
+              <string notr="true">font: 18pt &quot;Segoe UI&quot;;</string>
              </property>
              <property name="text">
               <string> STUDENT LOGIN</string>
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
            <item>
-            <widget class="QLabel" name="userLabel">
-             <property name="styleSheet">
-              <string notr="true">QLabel{
-font-size:15px
-}</string>
+            <spacer name="verticalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
              </property>
-             <property name="text">
-              <string>Username</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="userEdit">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
+             <property name="sizeHint" stdset="0">
               <size>
-               <width>509</width>
-               <height>16777215</height>
+               <width>20</width>
+               <height>40</height>
               </size>
              </property>
-             <property name="focusPolicy">
-              <enum>Qt::StrongFocus</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QLineEdit{
-font-size:15px;
-}</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="echoMode">
-              <enum>QLineEdit::Normal</enum>
-             </property>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -300,14 +315,25 @@ font-size:15px;
            <item>
             <widget class="QLabel" name="passwordLabel">
              <property name="styleSheet">
-              <string notr="true">QLabel{
-font-size: 15px;
-}</string>
+              <string notr="true">font: 18pt &quot;Segoe UI&quot;;</string>
              </property>
              <property name="text">
               <string>Password</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_11">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -320,9 +346,7 @@ font-size: 15px;
                 </sizepolicy>
                </property>
                <property name="styleSheet">
-                <string notr="true">QLineEdit{
-font-size:15px;
-}</string>
+                <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
                </property>
                <property name="echoMode">
                 <enum>QLineEdit::Password</enum>
@@ -337,12 +361,28 @@ font-size:15px;
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+               </property>
                <property name="text">
                 <string>Show</string>
                </property>
               </widget>
              </item>
             </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_12">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -363,6 +403,9 @@ font-size:15px;
            </item>
            <item>
             <widget class="QPushButton" name="changepasswordButton">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
               <string>Change Password</string>
              </property>
@@ -370,6 +413,9 @@ font-size:15px;
            </item>
            <item>
             <widget class="QPushButton" name="ok">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
               <string>Ok</string>
              </property>
@@ -377,10 +423,81 @@ font-size:15px;
            </item>
            <item>
             <widget class="QPushButton" name="backbutton">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
              <property name="text">
               <string>Back</string>
              </property>
             </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="userLabel">
+             <property name="styleSheet">
+              <string notr="true">font: 18pt &quot;Segoe UI&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Username</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="userEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>509</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::StrongFocus</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Normal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_10">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
