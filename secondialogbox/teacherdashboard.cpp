@@ -34,11 +34,11 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
     int width = yellowPic->width();
     int height = yellowPic->height();
 
-    QPixmap yellowPicture(":/images/images/yellowColour.jpeg");
+    QPixmap yellowPicture(":/images/images/1920x1080-yellow-solid-color-background.jpg");
     yellowPic->setPixmap(yellowPicture.scaled(width, height, Qt::KeepAspectRatio));
 
     QLabel *redPic = ui->redPic;
-    QPixmap redPicture(":/images/images/redColour.png");
+    QPixmap redPicture(":/images/images/1920x1080-red-solid-color-background.jpg");
     redPic->setPixmap(redPicture.scaled(width, height, Qt::KeepAspectRatio));
 
     ui->Calender->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);

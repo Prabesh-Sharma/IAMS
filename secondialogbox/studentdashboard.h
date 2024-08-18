@@ -28,7 +28,7 @@ class studentdashboard : public QDialog
     Q_OBJECT
 
 public:
-    explicit studentdashboard(QWidget *parent = nullptr);
+    explicit studentdashboard(QWidget *parent = nullptr, const QString &username = QString());
     ~studentdashboard();
 private slots:
 
@@ -61,6 +61,8 @@ private:
     List *list;
 
     QList<QMap<QDate, QString>> notesMap;
+
+    QString t_username;
 
 };
 

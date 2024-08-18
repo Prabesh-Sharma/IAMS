@@ -66,7 +66,7 @@ void studentwindow1::okbutton()
         if (count == 1) {
             ui->status->setText("Login successful");
             hide();
-            StudentDashBoard = new studentdashboard(this);
+            StudentDashBoard = new studentdashboard(this, username);
             StudentDashBoard->showMaximized();
         } else if (count > 1) {
             ui->status->setText("Duplicate username or password");

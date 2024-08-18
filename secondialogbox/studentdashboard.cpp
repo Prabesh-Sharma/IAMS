@@ -4,9 +4,9 @@
 #include <QMessageBox>
 #include <QDebug>
 
-studentdashboard::studentdashboard(QWidget *parent) :
+studentdashboard::studentdashboard(QWidget *parent,  const QString &username) :
     QDialog(parent),
-    ui(new Ui::studentdashboard), db(new Database), list(new List)
+    ui(new Ui::studentdashboard), db(new Database), t_username(username), list(new List)
 {
     ui->setupUi(this);
     this->resize(800, 600);
@@ -21,6 +21,20 @@ studentdashboard::studentdashboard(QWidget *parent) :
 
     QFont tooltipFont("Arial", 12);
     QToolTip::setFont(tooltipFont);
+
+    ui->stackedWidget->setCurrentWidget(ui->Home);
+    ui->userName->setText("Hello, " + t_username);
+
+    QLabel *yellowPic = ui->yelloPic;
+    int width = yellowPic->width();
+    int height = yellowPic->height();
+
+    QPixmap yellowPicture(":/images/images/1920x1080-yellow-solid-color-background.jpg");
+    yellowPic->setPixmap(yellowPicture.scaled(width, height, Qt::KeepAspectRatio));
+
+    QLabel *redPic = ui->redPic;
+    QPixmap redPicture(":/images/images/1920x1080-red-solid-color-background.jpg");
+    redPic->setPixmap(redPicture.scaled(width, height, Qt::KeepAspectRatio));
 
     ui->calendar->setVerticalHeaderFormat(QCalendarWidget::NoVerticalHeader);
 
