@@ -10,6 +10,12 @@ List::List() : db(new Database()){
 
 }
 
+List::~List(){
+
+    delete db;
+
+}
+
 void List::assignmentDates(){
 
     if (!db->connectionOpen()) {

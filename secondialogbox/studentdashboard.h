@@ -58,8 +58,6 @@ private:
 
     Database *db;
 
-    List *list;
-
     QList<QMap<QDate, QString>> notesMap;
 
     QString t_username;

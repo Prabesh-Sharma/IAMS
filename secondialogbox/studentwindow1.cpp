@@ -35,9 +35,7 @@ studentwindow1::studentwindow1(QWidget *parent)
 studentwindow1::~studentwindow1()
 {
     delete ui;
-    if (mydb.isOpen()) {
-        mydb.close();
-    }
+    delete db;
 }
 
 void studentwindow1::okbutton()
@@ -72,6 +70,7 @@ void studentwindow1::okbutton()
             ui->status->setText("Duplicate username or password");
         } else {
             ui->status->setText("Incorrect username or password");
+            ui->passwordEdit->setText("");
         }
     } else {
         qDebug() << "Query execution error: " << qry.lastError().text();

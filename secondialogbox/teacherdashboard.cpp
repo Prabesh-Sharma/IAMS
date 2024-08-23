@@ -50,10 +50,10 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
 
 teacherdashboard::~teacherdashboard()
 {
-            delete db;             // Clean up Database object
-            delete assignmentOps;  // Clean up AssignmentOperations object
-            delete internalOps;    // Clean up InternalOperations object
-            delete ui;             // Clean up UI object
+            delete db;
+            delete assignmentOps;
+            delete internalOps;
+            delete ui;
 }
 
 
@@ -152,21 +152,28 @@ teacherdashboard::~teacherdashboard()
                 qry.bindValue(":date", dateString);
                 qry.bindValue(":code", code);
 
-                if (!qry.exec()) {
+                if (qry.exec()) {
+                     QMessageBox::information(this, "Saved", "Data has been saved successfully.");
+                } else {
                     QMessageBox::information(this, "Error", "Failed to save data.");
                     qDebug() << "Query error: " << qry.lastError().text();
-                } else {
-                    QMessageBox::information(this, "Saved", "Data has been saved successfully.");
                 }
             } else {
                 QMessageBox::critical(this, "Cannot", "The date is already taken");
             }
-            db->connectionClose();
+
         } else {
             QMessageBox::critical(this, "Cannot", "You are not authorized to access this course ");
         }
+
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
+        internalOps->getNotes();
+        internalOps->showAvailableInternalDates();
+        db->connectionClose();
+
+
+
     }
 
     void teacherdashboard::on_internalAdd_clicked()
@@ -213,24 +220,38 @@ teacherdashboard::~teacherdashboard()
                 qry.bindValue(":time", timeString);
                 qry.bindValue(":date", dateString);
 
-                if (!qry.exec()) {
+
+
+                if (qry.exec()) {
+
+                    internalOps->highlightInternalDatesOnCalender();
+                    assignmentOps->highlightAssignmentDatesOnCalender();
+                    internalOps->showAvailableInternalDates();
+                    QMessageBox::information(this, "Saved", "Data has been saved successfully.");
+
+
+                } else {
+
                     QMessageBox::information(this, "Error", "Failed to save data.");
                     qDebug() << "Query error: " << qry.lastError().text();
-                } else {
-                    QMessageBox::information(this, "Saved", "Data has been saved successfully.");
+
                 }
-            } else {
-                QMessageBox::critical(this, "Cannot", "The date is already taken");
-                db->connectionClose();
             }
-        } else {
+            else {
+                QMessageBox::critical(this, "Cannot", "The date is already taken");
+
+            }
+        }
+        else {
             QMessageBox::critical(this, "Cannot", "You are not authorized to access this course ");
         }
 
-        db->connectionClose();
-
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
+        internalOps->getNotes();
+        internalOps->showAvailableInternalDates();
+        db->connectionClose();
+
 
     }
 
@@ -247,7 +268,7 @@ teacherdashboard::~teacherdashboard()
             qDebug() << "Failed to open database";
             return;
         }
-
+        if(matchcode(t_username,code)){
         QSqlQuery qry;
         qry.prepare("DELETE FROM Exam WHERE Course_Code = :code");
         qry.bindValue(":code", code);
@@ -258,10 +279,18 @@ teacherdashboard::~teacherdashboard()
             QMessageBox::information(this, "Error", "Failed to delete data.");
             qDebug() << "Query execution error: " << qry.lastError().text();
         }
+        }
+        else{
 
-        db->connectionClose();
+             QMessageBox::critical(this, "Cannot", "You are not authorized to access this course");
+        }
+
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
+        internalOps->getNotes();
+        internalOps->showAvailableInternalDates();
+
+        db->connectionClose();
     }
 
     void teacherdashboard::on_logOut_clicked()
@@ -321,6 +350,8 @@ teacherdashboard::~teacherdashboard()
         }
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
+        assignmentOps->getNotes();
+        assignmentOps->showAvailableAssignmentDates();
     }
 
     void teacherdashboard::on_assignmentupdateButton_clicked()
@@ -373,9 +404,11 @@ teacherdashboard::~teacherdashboard()
             QMessageBox::critical(this, "Cannot", "You are not authorized to access this course");
         }
 
-        db->connectionClose();
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
+        assignmentOps->getNotes();
+        assignmentOps->showAvailableAssignmentDates();
+        db->connectionClose();
     }
 
     void teacherdashboard::on_assignmentDeleteButton_clicked()
@@ -392,7 +425,10 @@ teacherdashboard::~teacherdashboard()
             return;
         }
 
+        if(matchcode(t_username,code)){
         QSqlQuery qry;
+
+        db->connectionOpen();
         qry.prepare("DELETE FROM Assignment WHERE courseCode = :code");
         qry.bindValue(":code", code);
 
@@ -402,9 +438,17 @@ teacherdashboard::~teacherdashboard()
             QMessageBox::information(this, "Error", "Failed to delete data.");
             qDebug() << "Query execution error: " << qry.lastError().text();
         }
+         }
+         else{
 
-        db->connectionClose();
+            QMessageBox::critical(this, "Cannot", "You are not authorized to access this course");
+
+         }
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
+        assignmentOps->getNotes();
+        assignmentOps->showAvailableAssignmentDates();
+        db->connectionClose();
     }
+
 

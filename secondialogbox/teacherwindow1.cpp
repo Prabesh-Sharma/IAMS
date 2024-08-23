@@ -37,6 +37,8 @@ SecDialog::SecDialog(QWidget *parent)
 SecDialog::~SecDialog()
 {
     delete ui;
+    delete db;
+
 }
 
 

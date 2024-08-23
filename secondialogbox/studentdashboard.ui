@@ -164,7 +164,7 @@ QPushButton:focus {
         <string notr="true">background-color: rgb(194, 203, 201); </string>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="Home">
         <layout class="QGridLayout" name="gridLayout_3">
@@ -237,14 +237,14 @@ calendarWidget-&gt;setStyleSheet(
        <widget class="QWidget" name="Assignment">
         <layout class="QGridLayout" name="gridLayout_5">
          <item row="0" column="0">
-          <widget class="QTableView" name="AssinmentTableView"/>
+          <widget class="QTableWidget" name="AssinmentTableWidget"/>
          </item>
         </layout>
        </widget>
        <widget class="QWidget" name="Internal">
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
-          <widget class="QTableView" name="internalTableView"/>
+          <widget class="QTableWidget" name="internalTableWidget"/>
          </item>
         </layout>
        </widget>

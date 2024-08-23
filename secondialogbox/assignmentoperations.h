@@ -25,6 +25,8 @@ public:
 
     AssignmentOperations(Ui::teacherdashboard *ui);
 
+     ~AssignmentOperations();
+
     bool getAllAssignmentDates(const QString &dateString);
 
     void highlightAssignmentDatesOnCalender();
@@ -45,8 +47,6 @@ private:
     Ui::teacherdashboard *ui;
 
     Database *db;
-
-    List *list;
 
     QList<QMap<QDate, QString>> notesMap;
 
