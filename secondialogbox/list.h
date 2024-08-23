@@ -9,7 +9,10 @@
 class List
 {
 public:
+
     List();
+
+    ~List();
 
     Database *db;
 

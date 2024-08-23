@@ -2,7 +2,7 @@
 
 QTextCharFormat assignmentHighlightFormat;
 
-AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), db(new Database()), list(new List()){
+AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), db(new Database()){
     assignmentHighlightFormat.setBackground(Qt::yellow);
 
     QFont tooltipFont("Arial", 12);
@@ -14,6 +14,11 @@ AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), d
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &AssignmentOperations::showNoteForSelectedDate);
 }
 
+AssignmentOperations::~ AssignmentOperations() {
+
+    delete db;
+
+}
 
 void AssignmentOperations::getNotes() {
 
@@ -52,6 +57,7 @@ void AssignmentOperations::getNotes() {
 }
 
 void AssignmentOperations::showNoteForSelectedDate() {
+
     QDate selectedDate = ui->Calender->selectedDate();
     for ( auto &notes : notesMap) {
         if (notes.contains(selectedDate)) {
@@ -70,6 +76,8 @@ void AssignmentOperations::showNoteForSelectedDate() {
 
 void AssignmentOperations::highlightAssignmentDatesOnCalender(){
 
+    List *list = new List();
+
     QStringList dateList = list->assignmentDateList;
 
 
@@ -85,6 +93,8 @@ void AssignmentOperations::highlightAssignmentDatesOnCalender(){
 }
 
 void AssignmentOperations::showAvailableAssignmentDates(){
+
+    List *list = new List();
 
     QStringList dateList = list->assignmentDateList;
 
@@ -130,11 +140,14 @@ void AssignmentOperations::showAvailableAssignmentDates(){
 
 bool AssignmentOperations::getAllAssignmentDates(const QString &dateString){
 
+    List *list = new List();
+
     QStringList assignmentDateList = list->assignmentDateList;
 
     assignmentDateList.append(list->updatedAssignmentDateList);
 
     assignmentDateList.append(list->internalDateList);
+
 
     return !assignmentDateList.contains(dateString);
 }

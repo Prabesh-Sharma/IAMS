@@ -3,13 +3,19 @@
 QTextCharFormat internalHighlightFormat;
 
 
-InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database()), list(new List()) {
+InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new Database()) {
 
     internalHighlightFormat.setBackground(Qt::red);
     QFont tooltipFont("Arial", 12);
     QToolTip::setFont(tooltipFont);
     getNotes();
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &InternalOperations::showNoteForSelectedDate);
+}
+
+InternalOperations::~InternalOperations(){
+
+    delete db;
+
 }
 
 void InternalOperations::getNotes() {
@@ -20,7 +26,7 @@ void InternalOperations::getNotes() {
     }
 
     QTextCharFormat highlightFormat;
-    highlightFormat.setBackground(Qt::yellow);
+    highlightFormat.setBackground(Qt::red);
 
     QSqlQuery qry;
     qry.prepare("SELECT Course_Code, Date, Time, Block, RoomNo FROM Exam");
@@ -51,6 +57,8 @@ void InternalOperations::getNotes() {
 }
 
 void InternalOperations::showNoteForSelectedDate() {
+
+
     QDate selectedDate = ui->Calender->selectedDate();
     for ( auto &notes : notesMap) {
         if (notes.contains(selectedDate)) {
@@ -71,6 +79,7 @@ void InternalOperations::highlightInternalDatesOnCalender()
     QTextCharFormat defaultFormat;
     ui->Calender->setDateTextFormat(QDate(), defaultFormat);
 
+    List *list = new List();
     QStringList dateList = list->internalDateList;
 
 
@@ -86,6 +95,8 @@ void InternalOperations::highlightInternalDatesOnCalender()
 
 bool InternalOperations::getAllInternalDates(const QString &dateString)
 {
+    List *list = new List();
+
     QStringList internalDateList = list->internalDateList;
 
     internalDateList.append(list->updatedInternalDateList);
@@ -96,6 +107,8 @@ bool InternalOperations::getAllInternalDates(const QString &dateString)
 }
 
 void InternalOperations::showAvailableInternalDates(){
+
+    List *list = new List();
 
     QStringList dateList = list->internalDateList;
 
