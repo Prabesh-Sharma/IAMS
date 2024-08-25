@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1506</width>
-    <height>866</height>
+    <height>988</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,19 +17,164 @@
    <string notr="true">background-color: rgb(230, 230, 250);
 color: black</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1506</width>
-     <height>25</height>
-    </rect>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">
+background-color: rgb(133, 146, 166);</string>
    </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label_3">
+        <property name="styleSheet">
+         <string notr="true">font: 24pt &quot;Segoe UI&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Welcome to IAMS</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label_4">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">min-width: 300px; min-height: 300px; max-width: 400px; max-height: 400px;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="pictures.qrc">:/images/images/Black Illustrative Education Logo.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label_5">
+        <property name="styleSheet">
+         <string notr="true">font: 24pt &quot;Segoe UI&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Login As</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="student_button">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 40px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+</string>
+          </property>
+          <property name="text">
+           <string>Student</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="teacher_button">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+	background-color: rgb(173, 216, 230);
+    color: white;
+    border: none;
+    font-size: 40px;
+    border-radius: 5px;
+}
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+
+</string>
+          </property>
+          <property name="text">
+           <string>Teacher</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+   <zorder>label</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>student_button</zorder>
+   <zorder></zorder>
+   <zorder>label_5</zorder>
+   <zorder></zorder>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="pictures.qrc"/>
+ </resources>
  <connections/>
 </ui>
