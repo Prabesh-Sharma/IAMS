@@ -19,13 +19,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void studentButton();
-    void teacherButton();
 
+    void on_student_button_clicked();
+
+    void on_teacher_button_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QPushButton *teacher_button,*student_button;
     SecDialog *teacherWindow1;
     studentwindow1 *studentWindow1;
 

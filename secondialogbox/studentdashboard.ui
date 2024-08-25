@@ -14,7 +14,8 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(230, 230, 250)</string>
+   <string notr="true">
+background-color: rgb(133, 146, 166);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_6">
    <item row="0" column="0">
@@ -31,24 +32,22 @@
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: rgb(0, 128, 128); 
+	background-color: rgb(173, 216, 230);
+
     color: white;
     border: none;
-    padding: 10px 20px;
     font-size: 20px;
     border-radius: 5px;
 }
 
+
 QPushButton:hover {
-    background-color: rgb(32, 178, 170); 
+    background-color: rgb(135, 206, 235); 
 }
 
-QPushButton:focus {
-    background-color: rgb(32,178,170); 
-    border: 2px solid rgb(0, 128, 128); 
-
-}
-</string>
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
          </property>
          <property name="text">
           <string>HOME</string>
@@ -65,23 +64,22 @@ QPushButton:focus {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: rgb(0, 128, 128); 
+	background-color: rgb(173, 216, 230);
+
     color: white;
     border: none;
     font-size: 20px;
     border-radius: 5px;
 }
 
+
 QPushButton:hover {
-    background-color: rgb(32, 178, 170); 
+    background-color: rgb(135, 206, 235); 
 }
 
-QPushButton:focus {
-    background-color: rgb(32,178,170); 
-    border: 2px solid rgb(0, 128, 128); 
-
-}
-</string>
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
          </property>
          <property name="text">
           <string>ASSIGNMENT</string>
@@ -98,24 +96,22 @@ QPushButton:focus {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: rgb(0, 128, 128); 
+	background-color: rgb(173, 216, 230);
+
     color: white;
     border: none;
-    padding: 10px 20px;
     font-size: 20px;
     border-radius: 5px;
 }
 
+
 QPushButton:hover {
-    background-color: rgb(32, 178, 170); 
+    background-color: rgb(135, 206, 235); 
 }
 
-QPushButton:focus {
-    background-color: rgb(32,178,170); 
-    border: 2px solid rgb(0, 128, 128); 
-
-}
-</string>
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
          </property>
          <property name="text">
           <string>INTERNAL</string>
@@ -132,24 +128,22 @@ QPushButton:focus {
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-    background-color: rgb(0, 128, 128); 
+	background-color: rgb(173, 216, 230);
+
     color: white;
     border: none;
-    padding: 10px 20px;
     font-size: 20px;
     border-radius: 5px;
 }
 
+
 QPushButton:hover {
-    background-color: rgb(32, 178, 170); 
+    background-color: rgb(135, 206, 235); 
 }
 
-QPushButton:focus {
-    background-color: rgb(32,178,170); 
-    border: 2px solid rgb(0, 128, 128); 
-
-}
-</string>
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
          </property>
          <property name="text">
           <string>LOG OUT</string>
@@ -161,7 +155,8 @@ QPushButton:focus {
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(194, 203, 201); </string>
+        <string notr="true">
+background-color: rgb(133, 146, 166);</string>
        </property>
        <property name="currentIndex">
         <number>2</number>

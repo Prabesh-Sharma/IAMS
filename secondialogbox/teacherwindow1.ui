@@ -14,8 +14,8 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(230, 230, 250);
-color: black</string>
+   <string notr="true">
+background-color: rgb(133, 146, 166);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
@@ -24,11 +24,11 @@ color: black</string>
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(230, 230, 250);
-color: black</string>
+      <string notr="true">
+background-color: rgb(133, 146, 166);</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="passwordPage">
       <layout class="QGridLayout" name="gridLayout_5">
@@ -52,7 +52,25 @@ color: black</string>
            <item>
             <widget class="QPushButton" name="changePassword">
              <property name="styleSheet">
-              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
              </property>
              <property name="text">
               <string>Change Password</string>
@@ -62,7 +80,25 @@ color: black</string>
            <item>
             <widget class="QPushButton" name="backButton">
              <property name="styleSheet">
-              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
              </property>
              <property name="text">
               <string>Back</string>
@@ -215,7 +251,25 @@ color: black</string>
                 </sizepolicy>
                </property>
                <property name="styleSheet">
-                <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+                <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
                </property>
                <property name="text">
                 <string>Show</string>
@@ -417,7 +471,25 @@ color: black</string>
                 </sizepolicy>
                </property>
                <property name="styleSheet">
-                <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+                <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
                </property>
                <property name="text">
                 <string>Show</string>
@@ -446,7 +518,25 @@ color: black</string>
            <item>
             <widget class="QPushButton" name="passwordButton">
              <property name="styleSheet">
-              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
              </property>
              <property name="text">
               <string>Change Password</string>
@@ -456,7 +546,25 @@ color: black</string>
            <item>
             <widget class="QPushButton" name="ok">
              <property name="styleSheet">
-              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
              </property>
              <property name="text">
               <string>Ok</string>
@@ -466,7 +574,25 @@ color: black</string>
            <item>
             <widget class="QPushButton" name="backbutton">
              <property name="styleSheet">
-              <string notr="true">font: 14pt &quot;Segoe UI&quot;;</string>
+              <string notr="true">font: 14pt &quot;Segoe UI&quot;;
+background-color: rgb(173, 216, 230);
+QPushButton {
+	background-color: rgb(173, 216, 230);
+
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+
+QPushButton:hover {
+    background-color: rgb(135, 206, 235); 
+}
+
+QPushButton:focus{
+	background-color: rgb(135, 206, 235)
+}</string>
              </property>
              <property name="text">
               <string>Back</string>

@@ -297,7 +297,7 @@ teacherdashboard::~teacherdashboard()
     {
         SecDialog *teacherlogin = new SecDialog;
         hide();
-        teacherlogin->show();
+        teacherlogin->showMaximized();
     }
 
     void teacherdashboard::on_assignmentAddButton_clicked()
