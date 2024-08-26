@@ -10,7 +10,7 @@
 
 SecDialog::SecDialog(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::SecDialog),db(new Database())
+    , ui(new Ui::SecDialog),db(new Database)
 {
     ui->setupUi(this);
 
@@ -21,7 +21,6 @@ SecDialog::SecDialog(QWidget *parent)
         ui->status->setText("Connected...");
     }
 
-    this->resize(800, 600);
     setWindowTitle("TeacherLogin");
 
     connect(ui->ok, &QPushButton::clicked, this, &SecDialog::okbutton);
@@ -68,7 +67,6 @@ void SecDialog::okbutton()
 
         if(count == 1){
             ui->status->setText("Login successful");
-            db->connectionClose();
             hide();
 
             TeacherDashBoard = new teacherdashboard(this, username);

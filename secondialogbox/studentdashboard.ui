@@ -34,7 +34,7 @@ background-color: rgb(133, 146, 166);</string>
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -66,7 +66,7 @@ QPushButton:focus{
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -98,7 +98,7 @@ QPushButton:focus{
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -130,7 +130,7 @@ QPushButton:focus{
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -159,7 +159,7 @@ QPushButton:focus{
 background-color: rgb(133, 146, 166);</string>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Home">
         <layout class="QGridLayout" name="gridLayout_3">
@@ -200,7 +200,7 @@ background-color: rgb(133, 146, 166);</string>
            <item row="1" column="0" colspan="2">
             <widget class="QCalendarWidget" name="calendar">
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(0, 128, 128);
+              <string notr="true">background-color: rgb(135, 206, 235);
 
 calendarWidget-&gt;setStyleSheet(
     &quot;QCalendarWidget QAbstractItemView:enabled:selected {&quot;

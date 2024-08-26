@@ -34,7 +34,7 @@ background-color: rgb(133, 146, 166);</string>
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -66,7 +66,7 @@ QPushButton:focus{
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -98,7 +98,7 @@ QPushButton:focus{
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -130,7 +130,7 @@ QPushButton:focus{
           <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
 
-    color: white;
+    color: black;
     border: none;
     font-size: 20px;
     border-radius: 5px;
@@ -159,7 +159,7 @@ QPushButton:focus{
 background-color: rgb(133, 146, 166);</string>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Home">
         <layout class="QGridLayout" name="gridLayout_2">
@@ -408,7 +408,7 @@ calendarWidget-&gt;setStyleSheet(
                  <property name="styleSheet">
                   <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     font-size: 20;
@@ -441,7 +441,7 @@ QPushButton:focus {
                  <property name="styleSheet">
                   <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     font-size: 20;
@@ -474,7 +474,7 @@ QPushButton:focus {
                  <property name="styleSheet">
                   <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     font-size: 20;
@@ -739,7 +739,7 @@ font-size:20px;</string>
                   <property name="styleSheet">
                    <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     font-size: 20px;
@@ -766,7 +766,7 @@ background-color: rgb(135, 206, 235);}
                   <property name="styleSheet">
                    <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     font-size: 20px;
@@ -794,7 +794,7 @@ QPushButton:hover {
                   <property name="styleSheet">
                    <string notr="true">QPushButton {
 	background-color: rgb(173, 216, 230);
-    color: white;
+    color: black;
     border: none;
     padding: 10px 20px;
     font-size: 20px;

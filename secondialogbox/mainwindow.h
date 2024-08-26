@@ -25,8 +25,11 @@ private slots:
     void on_teacher_button_clicked();
 
 private:
-    Ui::MainWindow *ui;
+
+    Ui::MainWindow *ui ;
+
     SecDialog *teacherWindow1;
+
     studentwindow1 *studentWindow1;
 
 };

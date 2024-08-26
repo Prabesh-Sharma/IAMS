@@ -17,7 +17,6 @@ studentwindow1::studentwindow1(QWidget *parent)
         ui->status->setText("Connected...");
     }
 
-    this->resize(800, 600);
     setWindowTitle("StudentLogin");
 
     connect(ui->ok, &QPushButton::clicked, this, &studentwindow1::okbutton);
@@ -68,6 +67,8 @@ void studentwindow1::okbutton()
             StudentDashBoard->showMaximized();
         } else if (count > 1) {
             ui->status->setText("Duplicate username or password");
+            ui->passwordEdit->setText("");
+
         } else {
             ui->status->setText("Incorrect username or password");
             ui->passwordEdit->setText("");
@@ -81,7 +82,7 @@ void studentwindow1::okbutton()
 
 void studentwindow1::backbutton()
 {
-    MainWindow *mainw = new MainWindow(this);
+    MainWindow *mainw = new MainWindow;
     hide();
     mainw->show();
 }
