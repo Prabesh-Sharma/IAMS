@@ -160,16 +160,6 @@ QPushButton:hover {
      </layout>
     </item>
    </layout>
-   <zorder>label</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label_3</zorder>
-   <zorder>label_3</zorder>
-   <zorder>label_4</zorder>
-   <zorder>student_button</zorder>
-   <zorder></zorder>
-   <zorder>label_5</zorder>
    <zorder></zorder>
   </widget>
  </widget>

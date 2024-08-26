@@ -2,13 +2,12 @@
 #define TEACHERWINDOW1_H
 
 #include "database.h"
-
+#include "teacherdashboard.h"
 #include <QDialog>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QDebug>
 
-class teacherdashboard;
 
 namespace Ui {
 class SecDialog;
@@ -35,15 +34,18 @@ private slots:
 
     void on_backButton_clicked();
 
-
     void on_showButton_clicked();
 
     void on_showButton_2_clicked();
 
 private:
+
     Ui::SecDialog *ui;
+
     teacherdashboard *TeacherDashBoard;
+
     QSqlDatabase mydb;
+
     Database *db;
 
 };

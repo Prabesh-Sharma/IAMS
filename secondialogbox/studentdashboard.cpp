@@ -58,11 +58,9 @@ void studentdashboard::on_logOutButton_clicked()
 {
     studentwindow1 *studentlogin = new studentwindow1;
     hide();
-    studentlogin->show();
+    studentlogin->showMaximized();
 
-    if (mydb.isOpen()) {
-        mydb.close();
-    }
+
 }
 
 void studentdashboard::on_homeButton_clicked()
@@ -104,8 +102,9 @@ void studentdashboard::on_assignmentButton_clicked(){
     QTableWidget *assignmentTable = ui->AssinmentTableWidget;
 
     assignmentTable->setRowCount(assignmentDateList.size());
-    assignmentTable->setColumnCount(3);  // Assuming three columns: Deadline, Course Code, Start Date
-    assignmentTable->setHorizontalHeaderLabels(QStringList() << "Course Code" << "Deadline" << "Start Date");
+    assignmentTable->setColumnCount(3);
+    QStringList title = {"Course Code", "Deadline", "Start Date"};
+    assignmentTable->setHorizontalHeaderLabels(title);
     assignmentTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     assignmentTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -167,7 +166,7 @@ void studentdashboard::on_internalButton_clicked()
     internalTable->horizontalHeader()->setFont(headerFont);
 
 
-    QStringList headers = QStringList() << "Course Code" << "Date" << "Time" << "Block" << "Room No";
+    QStringList headers = {"Course Code", "Date", "Time", "Block", "Room No"};
     internalTable->setHorizontalHeaderLabels(headers);
 
     internalTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

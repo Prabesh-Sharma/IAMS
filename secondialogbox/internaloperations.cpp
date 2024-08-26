@@ -8,7 +8,7 @@ InternalOperations::InternalOperations(Ui::teacherdashboard *ui) : ui(ui),db(new
     internalHighlightFormat.setBackground(Qt::red);
     QFont tooltipFont("Arial", 12);
     QToolTip::setFont(tooltipFont);
-    getNotes();
+
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &InternalOperations::showNoteForSelectedDate);
 }
 
@@ -58,20 +58,20 @@ void InternalOperations::getNotes() {
 
 void InternalOperations::showNoteForSelectedDate() {
 
-
     QDate selectedDate = ui->Calender->selectedDate();
-    for ( auto &notes : notesMap) {
+    for ( auto const &notes : notesMap) {
         if (notes.contains(selectedDate)) {
             QString note = notes.value(selectedDate);
 
-            // Test tooltip display
+
             QPoint globalPos = QCursor::pos();
+
             QToolTip::showText(globalPos, note, ui->Calender);
 
-            qDebug() << "Showing tooltip for date:" << selectedDate.toString();
             return;
         }
     }
+
 }
 
 void InternalOperations::highlightInternalDatesOnCalender()
@@ -79,7 +79,7 @@ void InternalOperations::highlightInternalDatesOnCalender()
     QTextCharFormat defaultFormat;
     ui->Calender->setDateTextFormat(QDate(), defaultFormat);
 
-    List *list = new List();
+    List *list = new List();  //IMP
     QStringList dateList = list->internalDateList;
 
 
@@ -91,6 +91,8 @@ void InternalOperations::highlightInternalDatesOnCalender()
         QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
         ui->Calender->setDateTextFormat(originalDate, highlightFormat);
     }
+    getNotes();
+
 }
 
 bool InternalOperations::getAllInternalDates(const QString &dateString)
@@ -105,7 +107,6 @@ bool InternalOperations::getAllInternalDates(const QString &dateString)
 
     return !internalDateList.contains(dateString);
 }
-
 void InternalOperations::showAvailableInternalDates(){
 
     List *list = new List();
@@ -119,7 +120,7 @@ void InternalOperations::showAvailableInternalDates(){
     QStringList availableDateList;
     QDate currentDate = QDate::currentDate();
 
-    int size = dateList.size() + 10;
+    int size = dateList.size() + 10 ;
     for (int i = 0; i < size; i++) {
         QString dateString = currentDate.addDays(i + 7).toString("MM/dd/yyyy");
         availableDateList.append(dateString);
@@ -142,6 +143,7 @@ void InternalOperations::showAvailableInternalDates(){
     internalTableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     int row = 0;
+
     for (const QString& date : availableDateList) {
         internalTableWidget->setItem(row, 0, new QTableWidgetItem(date));
         ++row;

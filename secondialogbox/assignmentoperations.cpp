@@ -9,7 +9,6 @@ AssignmentOperations::AssignmentOperations(Ui::teacherdashboard *ui) : ui(ui), d
     QToolTip::setFont(tooltipFont);
 
 
-    getNotes();
 
     connect(ui->Calender, &QCalendarWidget::selectionChanged, this, &AssignmentOperations::showNoteForSelectedDate);
 }
@@ -71,6 +70,7 @@ void AssignmentOperations::showNoteForSelectedDate() {
             return;
         }
     }
+
     qDebug() << "No note found for date:" << selectedDate.toString();
 }
 
@@ -89,6 +89,8 @@ void AssignmentOperations::highlightAssignmentDatesOnCalender(){
         QDate originalDate = QDate::fromString(dateString, "MM/dd/yyyy");
         ui->Calender->setDateTextFormat(originalDate, highlightFormat);
     }
+    getNotes();
+    showNoteForSelectedDate();
 
 }
 

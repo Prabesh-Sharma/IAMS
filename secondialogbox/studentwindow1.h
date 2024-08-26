@@ -22,6 +22,7 @@ public:
     ~studentwindow1();
 
 private slots:
+
     void okbutton();
 
     void backbutton();

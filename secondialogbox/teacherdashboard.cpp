@@ -11,9 +11,13 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
     , ui(new Ui::teacherdashboard), t_username(username),db(new Database())
 {
     ui->setupUi(this);
-    this->resize(800, 600);
+    this->showMaximized();
     setWindowTitle("TeacherDashBoard");
 
+
+    /*
+        Initialzing asssignmentOps and internalOps
+*/
     assignmentOps = new AssignmentOperations(ui);
     internalOps = new InternalOperations(ui);
 
@@ -21,12 +25,17 @@ teacherdashboard::teacherdashboard(QWidget *parent, const QString &username)
     connect(ui->assignmentButton, &QPushButton::clicked, this, &teacherdashboard::showAssignmentPage);
     connect(ui->internalButton, &QPushButton::clicked, this, &teacherdashboard::showInternalPage);
 
+    // Set the current stack widget to home
+
     ui->stackedWidget->setCurrentWidget(ui->Home);
+
     ui->showusername->setText("Hello, " + t_username);
 
+    // Highlight the calender with assignment and internals
     internalOps->highlightInternalDatesOnCalender();
     assignmentOps->highlightAssignmentDatesOnCalender();
 
+    //set the current date to dateedits
     ui->dateEdit->setDate(QDate::currentDate());
     ui->assignmentDateEdit->setDate(QDate::currentDate());
 
@@ -67,7 +76,6 @@ teacherdashboard::~teacherdashboard()
     {
         ui->stackedWidget->setCurrentWidget(ui->Assignment);
         assignmentOps->showAvailableAssignmentDates();
-
     }
 
     void teacherdashboard::showInternalPage()
@@ -168,7 +176,6 @@ teacherdashboard::~teacherdashboard()
 
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
-        internalOps->getNotes();
         internalOps->showAvailableInternalDates();
         db->connectionClose();
 
@@ -224,9 +231,6 @@ teacherdashboard::~teacherdashboard()
 
                 if (qry.exec()) {
 
-                    internalOps->highlightInternalDatesOnCalender();
-                    assignmentOps->highlightAssignmentDatesOnCalender();
-                    internalOps->showAvailableInternalDates();
                     QMessageBox::information(this, "Saved", "Data has been saved successfully.");
 
 
@@ -248,7 +252,6 @@ teacherdashboard::~teacherdashboard()
 
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
-        internalOps->getNotes();
         internalOps->showAvailableInternalDates();
         db->connectionClose();
 
@@ -269,6 +272,7 @@ teacherdashboard::~teacherdashboard()
             return;
         }
         if(matchcode(t_username,code)){
+        db->connectionOpen();
         QSqlQuery qry;
         qry.prepare("DELETE FROM Exam WHERE Course_Code = :code");
         qry.bindValue(":code", code);
@@ -287,7 +291,6 @@ teacherdashboard::~teacherdashboard()
 
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
-        internalOps->getNotes();
         internalOps->showAvailableInternalDates();
 
         db->connectionClose();
@@ -350,7 +353,6 @@ teacherdashboard::~teacherdashboard()
         }
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
-        assignmentOps->getNotes();
         assignmentOps->showAvailableAssignmentDates();
     }
 
@@ -406,7 +408,6 @@ teacherdashboard::~teacherdashboard()
 
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
-        assignmentOps->getNotes();
         assignmentOps->showAvailableAssignmentDates();
         db->connectionClose();
     }
@@ -446,7 +447,6 @@ teacherdashboard::~teacherdashboard()
          }
         internalOps->highlightInternalDatesOnCalender();
         assignmentOps->highlightAssignmentDatesOnCalender();
-        assignmentOps->getNotes();
         assignmentOps->showAvailableAssignmentDates();
         db->connectionClose();
     }

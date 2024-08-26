@@ -5,7 +5,6 @@
 #include "database.h"
 #include "list.h"
 
-
 #include <QString>
 #include <QDebug>
 #include <QCalendarWidget>
@@ -25,22 +24,26 @@ class InternalOperations : public QObject
 public:
 
     InternalOperations(Ui::teacherdashboard *ui);
+
     ~InternalOperations();
+
     bool getAllInternalDates(const QString &dateString);
+
     void highlightInternalDatesOnCalender();
+
     void showAvailableInternalDates();
-    QStringList checkInternalDate(QStringList &dateList);
-    void getAllAssignmentDateList();
+
     void getNotes();
+
     void showNoteForSelectedDate();
-    void mousePressEvent(QMouseEvent *event);
+
 
 private:
 
     QSqlDatabase mydb;
     Ui::teacherdashboard *ui;
     Database *db;
-    QList<QMap<QDate, QString>> notesMap;
+    QList <QMap<QDate, QString>> notesMap;
 };
 
 #endif // INTERNALOPERATIONS_H

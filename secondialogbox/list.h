@@ -28,11 +28,6 @@ public:
 
     void updatedInternalDates();
 
-
-
-
-
-
 };
 
 #endif // LIST_H
